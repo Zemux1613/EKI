@@ -1,0 +1,11 @@
+(setq x 3)
+(setq y (+ x (* x x)))
+(print (+ y x))
+
+(defun quad (z) (* z z))
+(print (quad 2))
+(print (quad x))
+(print (quad y))
+(print (quad (* x x)))
+(print (quad (+ y y)))
+(print (quad (+ (* x x) y x x x x)))
