@@ -1,1 +1,1 @@
-S -> 'a' S 'a' | 'b' S 'b' | 'a' | 'b' | 'EPSILON'
+S -> 'a' S 'a' | 'b' S 'b' | 'a' | 'b' | 'aa' | 'bb'
