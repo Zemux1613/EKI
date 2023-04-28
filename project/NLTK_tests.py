@@ -24,7 +24,7 @@ def main():
     # generate ( grammar, startDeep = optional, maxDeep = optional, amountOfWords = optional )
     # important! Infinitely deep recursion always needs a maximum depth otherwise there will be complications
     print(list(generate(grammar, 0, 5)))
-    runPalindromTests(grammar, ['a', 'b', 'bab', 'bb', 'aa', 'aba', 'abba'])
+    runPalindromTests(grammar, ['a', 'b', 'bab', 'bb', 'aa', 'aba', 'abb', 'abaaabbbabbbaaaba'])
 
 
 def runPalindromTests(grammar, words):
