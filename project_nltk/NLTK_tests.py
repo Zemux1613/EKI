@@ -10,7 +10,7 @@ def loadGrammarFromFile(grammar_file):
 # Hauptprogramm
 def main():
     # Pfad zur Grammatikdatei
-    grammar_file = 'project/grammar_cnf.txt'
+    grammar_file = 'project_nltk/grammar_cnf.txt'
 
     # Lade Grammatikdatei
     grammar = loadGrammarFromFile(grammar_file)
