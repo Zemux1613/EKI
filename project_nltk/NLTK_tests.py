@@ -6,14 +6,20 @@ def loadGrammarFromFile(grammar_file):
     with open(grammar_file, 'r') as file:
         return CFG.fromstring(file)
 
+def setupGrammar(grammar):
+    grammar.add_production_rule('')
 
 # Hauptprogramm
 def main():
     # Pfad zur Grammatikdatei
-    grammar_file = 'project_nltk/grammar_cnf.txt'
+    grammar_file = 'project_nltk/auto.txt'
 
     # Lade Grammatikdatei
     grammar = loadGrammarFromFile(grammar_file)
+
+    print(grammar)
+
+    setupGrammar(grammar)
 
     print(grammar)
     # print("My start symbol: ")
@@ -23,8 +29,10 @@ def main():
     print("Word generation: ")
     # generate ( grammar, startDeep = optional, maxDeep = optional, amountOfWords = optional )
     # important! Infinitely deep recursion always needs a maximum depth otherwise there will be complications
-    print(list(generate(grammar, 0, 5)))
-    runPalindromTests(grammar, ['a', 'b', 'bab', 'bb', 'aa', 'aba', 'abb', 'abaaabbbabbbaaaba'])
+    print(list(generate(grammar, depth=5)))
+
+    # test parsing
+    # runPalindromTests(grammar, ['a', 'b', 'bab', 'bb', 'aa', 'aba', 'abb', 'abaaabbbabbbaaaba'])
 
 
 def runPalindromTests(grammar, words):

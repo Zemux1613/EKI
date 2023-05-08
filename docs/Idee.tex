@@ -1,0 +1,47 @@
+\documentclass[12pt]{scrartcl}
+% page counting, header/footer
+\usepackage{fancyhdr, lastpage, amsfonts, graphicx}
+\usepackage[ngerman]{babel}
+\usepackage[colorlinks=true, urlcolor=red, linkcolor=black]{hyperref}
+
+\pagestyle{fancy}
+\lhead{\footnotesize \parbox{11cm}{EKI} }
+\cfoot{}
+% \chead{\footnotesize { } }
+\rhead{\footnotesize WS 2022/23}
+\rfoot{\footnotesize Seite \thepage\ / \pageref{LastPage}}
+\renewcommand{\headheight}{24pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+	\tableofcontents
+	\newpage
+	
+	\section{Projektaufgabe - NLP „Textanalyse“}
+	Entwickeln Sie ein Programm in der \textbf{Programmiersprache Ihrer Wahl}, das gültige Zeichenketten der durch eine kontextfreie Grammatik definierten Sprache akzeptieren kann. Eine konkrete Grammatik soll in Form einer Textdatei übergeben werden und änderbar sein. Zusätzlich soll Ihr Programm das Vorhandensein von folgenden abkürzenden Notationen in der Grammatik unterstützen:
+	\begin{itemize}
+		\item { | ...für Alternativen auf der rechten Seite einer Produktionsregel}
+		\item {[...]* ...für 0 bis n Wiederholungen auf der rechten Seite einer Produktionsregel}
+		\item {[...]+ ...für 1 bis n Wiederholungen auf der rechten Seite der Produktionsregel}
+		\item {[...]? ...für optionale Elemente auf der rechten Seite einer Produktionsregel}
+	\end{itemize}
+	Entwerfen Sie als Testfälle für Ihr Programm eine Grammatik für Fragen oder für Aufforderungen (vgl. \url{http://www.canoo.net/services/OnlineGrammar/Satz/Satzart/index.html?MenuId=Sentence10}) in deutscher Sprache. Geben Sie Fragen bzw. Aufforderungen ein, so dass Ihr Programm bei einer gültigen Zeichenkette einen Syntaxbaum erzeugt. Überlegen Sie darüber hinaus, wie Ihr Programm mit unbekannten Zeichenketten unter Nutzung einer einfachen Hypothesenbildung analysieren kann.
+	\newpage
+	
+	\section{Verwendete Technologie}
+	\begin{itemize}
+		\item {Python - Als Basistechnologie}
+		\item {NLTK - Verwendet als Framwork zur Verarbeitung von Grammatiken}
+		\item {SpacY - Verwendet als Tokenize Framwork}
+	\end{itemize}
+	
+	\section{Lexikalische Analyse}
+	Zur Unterstützung semantischer Erweiterungen in übergebenen Grammatiken wird im Lexikalischen Prozess eingegriffen. Durch NLTK wird von Haus aus "|" als Alternative Produktionsregel angeboten. 
+	\subsection{Kleene Star Operator}
+	Für die Anforderung "[...]*" zu unterstützen sind folgende Überlegungen notwendig. Wunsch: \\ \\
+	G = (N,A,P,s) \\
+	$A = \{a\}$, $N = \{s\}$ \\
+	P = $\{s \to a^{*}\}$ \\ \\
+	Um den Stern-Operator mit der Anforderung 0 bis n Wiederholungen zu benutzen muss er auf bereits bekannte syntaktische Elemente zurückgeführt werden. Dazu folgendes vorgehen, eine Produktionsregel welche auf der rechten Seite Terminalsymbole mit dem Stern-Operator besitzt wird zurückgeführt auf "$<$nicht Terminal$>$ $\to \epsilon \vert$ $<$nicht Terminal$><$Terminal$>$". Dabei ist mit "$<$nicht Terminal$>$" das selbe Nichtterminalsymbol gemeint. \\
+	
+\end{document}
