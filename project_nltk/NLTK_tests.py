@@ -1,14 +1,13 @@
 from nltk import CFG, ChartParser, chomsky_normal_form, Production
 from nltk.parse.generate import generate
+from grammar.grammarTool import *
 
 
 def loadGrammarFromFile(grammar_file):
-    with open(grammar_file, 'r') as file:
-        return CFG.fromstring(file)
-
-def setupGrammar(grammar):
-    grammar.add_production_rule('')
-
+    fileOutput = readGrammarFromFile(grammar_file)
+    print(fileOutput)
+    grammar = CFG.fromstring(fileOutput)
+    return grammar
 # Hauptprogramm
 def main():
     # Pfad zur Grammatikdatei
@@ -16,10 +15,6 @@ def main():
 
     # Lade Grammatikdatei
     grammar = loadGrammarFromFile(grammar_file)
-
-    print(grammar)
-
-    setupGrammar(grammar)
 
     print(grammar)
     # print("My start symbol: ")
