@@ -11,40 +11,39 @@ def getContent(filename):
 
 nonTerminalIndex = 0
 
-
 def generateNonTerminal():
     global nonTerminalIndex
     nonTerminalIndex = nonTerminalIndex + 1
+    return "A" + str(nonTerminalIndex)
 
 
 def replaceSyntax(x, rhs):
     replaceRule = ""
-    if x.__contains__("?"):
-        x = x.replace("?", " | epsilon")
+    if "?" in x:
+        x = x.replace("?", " | ''")
 
-    if x.__contains__("+"):
-        nonTerminal = "A" + str(nonTerminalIndex)
-        generateNonTerminal()
+    if "+" in x:
+        nonTerminal = generateNonTerminal()
         x = x.replace("+", "")
         content = x.strip()
         replaceRule = rhs + " -> " + nonTerminal
-        x = nonTerminal + " -> " + content + " | " + nonTerminal + content
+        x = nonTerminal + " -> " + content + " | " + nonTerminal + " " + content
 
-    if x.__contains__("*"):
-        nonTerminal = "A" + str(nonTerminalIndex)
-        generateNonTerminal()
+    if "*" in x:
+        nonTerminal = generateNonTerminal()
         x = x.replace("*", "")
         content = x.strip()
         replaceRule = rhs + " -> " + nonTerminal
-        x = nonTerminal + " -> " + content + " | " + nonTerminal + " " + content + " | epsilon"
+        x = nonTerminal + " -> " + content + " | " + nonTerminal + " " + content + " | ''"
 
     return x.strip(), replaceRule
+
 
 def readGrammarFromFile(filename):
     output = ""
     startSymbol = ""
     content = getContent(filename)
-    if content.__contains__("->"):
+    if "->" in content:
         startSymbol = content.split("->")[0]
 
     #
@@ -55,11 +54,11 @@ def readGrammarFromFile(filename):
         if len(line) == 0:
             continue
         rhs = line.split("->")[0].strip()
-        if line.__contains__("|"):
+        if "|" in line:
             split = line.split("|")
             for x in split:
                 currentLhs = x
-                if currentLhs.__contains__("->"):
+                if "->" in currentLhs:
                     currentLhs = x.split("->")[1].strip()
                 lhs, replaceRule = replaceSyntax(currentLhs, rhs)
                 # print(rhs + " -> " + lhs.strip())
@@ -68,7 +67,7 @@ def readGrammarFromFile(filename):
                     output += replaceRule + "\n"
         else:
             currentLhs = line
-            if currentLhs.__contains__("->"):
+            if "->" in currentLhs:
                 line.split("->")[1].strip()
             lhs, replaceRule = replaceSyntax(currentLhs, rhs)
             # print(rhs + " -> " + lhs.strip())
