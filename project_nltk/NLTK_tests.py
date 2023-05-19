@@ -8,10 +8,12 @@ def loadGrammarFromFile(grammar_file):
     print(fileOutput)
     grammar = CFG.fromstring(fileOutput)
     return grammar
+
+
 # Hauptprogramm
 def main():
     # Pfad zur Grammatikdatei
-    grammar_file = 'project_nltk/auto.txt'
+    grammar_file = 'grammar/auto.txt'
 
     # Lade Grammatikdatei
     grammar = loadGrammarFromFile(grammar_file)
@@ -41,9 +43,9 @@ def runPalindromTests(grammar, words):
 
 def generate_syntax_tree(grammar, word):
     # if not grammar.is_chomsky_normal_form():
-        # note that, the grammar#chomsky_normal_form method can't handle mixed rules like s => asa...
-        # grammar = grammar.chomsky_normal_form()
-        # grammar = convert_grammar_to_cnf(grammar)
+    # note that, the grammar#chomsky_normal_form method can't handle mixed rules like s => asa...
+    # grammar = grammar.chomsky_normal_form()
+    # grammar = convert_grammar_to_cnf(grammar)
     parser = ChartParser(grammar)
     parse = parser.parse(word)
     for tree in parse:
@@ -51,6 +53,7 @@ def generate_syntax_tree(grammar, word):
         tree.draw()
         print(f"Height: {tree.height()}")
         print(f"Leaves: {tree.leaves()}")
+
 
 if __name__ == '__main__':
     main()
