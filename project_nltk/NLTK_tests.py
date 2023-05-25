@@ -2,9 +2,8 @@ from nltk import CFG, ChartParser, chomsky_normal_form, Production
 from nltk.parse.generate import generate
 from grammar.grammarTool import *
 
-
 def loadGrammarFromFile(grammar_file):
-    fileOutput = readGrammarFromFile(grammar_file)
+    fileOutput = GrammarTool.readGrammarFromFile(GrammarTool(), grammar_file)
     print(fileOutput)
     grammar = CFG.fromstring(fileOutput)
     return grammar
@@ -13,7 +12,7 @@ def loadGrammarFromFile(grammar_file):
 # Hauptprogramm
 def main():
     # Pfad zur Grammatikdatei
-    grammar_file = 'grammar/auto.txt'
+    grammar_file = '../grammar/auto.txt'
 
     # Lade Grammatikdatei
     grammar = loadGrammarFromFile(grammar_file)
