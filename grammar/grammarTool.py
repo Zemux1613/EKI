@@ -19,11 +19,11 @@ class GrammarTool:
         return "A" + str(self.nonTerminalIndex)
 
     def searchForExistingNonTerminal(self, content):
-        for line in content.split(";"):
+        for line in content:
             if re.search("^(A[0-9]+).*$", line):
                 print("found " + line)
                 nonTerminal = line.split("->")[0].strip()
-                index = int(nonTerminal.replace("A", ""));
+                index = int(nonTerminal.replace("A", ""))
                 if self.nonTerminalIndex < index:
                     print("new index " + str(index))
                     self.nonTerminalIndex = index
@@ -35,19 +35,35 @@ class GrammarTool:
 
         if "+" in x:
             nonTerminal = self.generateNonTerminal()
-            x = x.replace("+", "")
+            x = x.split("->")[1].replace("+", "")
             content = x.strip()
             replaceRule = rhs + " -> " + nonTerminal
             x = nonTerminal + " -> " + content + " | " + nonTerminal + " " + content
 
         if "*" in x:
             nonTerminal = self.generateNonTerminal()
-            x = x.replace("*", "")
+            x = x.split("->")[1].replace("*", "")
             content = x.strip()
             replaceRule = rhs + " -> " + nonTerminal
             x = nonTerminal + " -> " + content + " | " + nonTerminal + " " + content + " | ''"
+#            print(f"\t\tx:{x}, replaceRule:{replaceRule}")
 
         return x.strip(), replaceRule
+
+    def handleDisjunctions(self, content):
+        new_grammar = []
+        for line in content.split(";"):
+            if "|" in line:
+                if "->" in line:
+                    lhs = line.split("->")[0]
+                    rhs = line.split("->")[1]
+                    for option in rhs.split("|"):
+                        new_rule = f"{lhs} -> {option}"
+                        new_grammar.append(new_rule)
+            else:
+                new_grammar.append(line)
+        return new_grammar
+
 
     def readGrammarFromFile(self, filename):
         output = ""
@@ -57,35 +73,41 @@ class GrammarTool:
             startSymbol = content.split("->")[0]
 
         #
+        # handle disjunctions
+        #
+
+        contentWithoutDisjunctions = self.handleDisjunctions(content)
+
+        #
         # Now here are advanced syntax simplifications
         #
 
-        self.searchForExistingNonTerminal(content)
+        self.searchForExistingNonTerminal(contentWithoutDisjunctions)
 
-        for line in content.split(";"):
+        for line in contentWithoutDisjunctions:
             if len(line) == 0:
                 continue
             rhs = line.split("->")[0].strip()
-            if "|" in line:
-                split = line.split("|")
-                for x in split:
-                    currentLhs = x
-                    if "->" in currentLhs:
-                        currentLhs = x.split("->")[1].strip()
-                    lhs, replaceRule = self.replaceSyntax(currentLhs, rhs)
-                    # print(rhs + " -> " + lhs.strip())
-                    output += lhs.strip() + "\n"
-                    if not len(replaceRule) == 0:
-                        output += replaceRule + "\n"
-            else:
-                currentLhs = line
-                if "->" in currentLhs:
-                    line.split("->")[1].strip()
-                lhs, replaceRule = self.replaceSyntax(currentLhs, rhs)
-                # print(rhs + " -> " + lhs.strip())
-                output += lhs.strip() + "\n"
-                if not len(replaceRule) == 0:
-                    output += replaceRule + "\n"
+            #if "|" in line:
+            #    split = line.split("|")
+            #    for x in split:
+            #        currentLhs = x
+            #        if "->" in currentLhs:
+            #            currentLhs = x.split("->")[1].strip()
+            #        lhs, replaceRule = self.replaceSyntax(currentLhs, rhs)
+            #        # print(rhs + " -> " + lhs.strip())
+            #        output += lhs.strip() + "\n"
+            #        if not len(replaceRule) == 0:
+            #            output += replaceRule + "\n"
+            #else:
+            currentLhs = line
+            if "->" in currentLhs:
+                line.split("->")[1].strip()
+            lhs, replaceRule = self.replaceSyntax(currentLhs, rhs)
+            print("\t" + lhs.strip())
+            output += lhs.strip() + "\n"
+            if not len(replaceRule) == 0:
+                output += replaceRule + "\n"
 
         #
         # For NLTK, move a product rule of the start symbol to the begin

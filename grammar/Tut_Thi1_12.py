@@ -16,6 +16,8 @@ if __name__ == '__main__':
 
     grammarInUse = IfElseGrammar
 
+    print(grammarInUse)
+
     for item in list(generate(grammarInUse, depth=6)):
         parser = ChartParser(grammarInUse)
         parse = parser.parse(item)

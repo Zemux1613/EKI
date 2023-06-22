@@ -12,7 +12,7 @@ def loadGrammarFromFile(grammar_file):
 # Hauptprogramm
 def main():
     # Pfad zur Grammatikdatei
-    grammar_file = '../grammar/auto.txt'
+    grammar_file = 'grammar/grammar.txt'
 
     # Lade Grammatikdatei
     grammar = loadGrammarFromFile(grammar_file)
