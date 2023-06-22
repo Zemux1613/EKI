@@ -104,7 +104,7 @@ class GrammarTool:
             if "->" in currentLhs:
                 line.split("->")[1].strip()
             lhs, replaceRule = self.replaceSyntax(currentLhs, rhs)
-            print("\t" + lhs.strip())
+            #print("\t" + lhs.strip())
             output += lhs.strip() + "\n"
             if not len(replaceRule) == 0:
                 output += replaceRule + "\n"
