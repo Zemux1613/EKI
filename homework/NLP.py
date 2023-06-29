@@ -12,12 +12,12 @@ if __name__ == '__main__':
         """
     )
 
-    for item in list(generate(grammarInUse, n=100)):
+    for item in list(generate(grammarInUse, n=1000)):
         parser = ChartParser(grammarInUse)
         parse = parser.parse(item)
-        print(f"word:{item}")
+        #print(f"word:{item}")
         for tree in parse:
-            tree.pretty_print()
+            #tree.pretty_print()
             #tree.draw()
-            print(f"Height: {tree.height()}")
+            #print(f"Height: {tree.height()}")
             print(f"Leaves: {tree.leaves()}")
