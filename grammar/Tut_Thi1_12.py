@@ -26,4 +26,3 @@ if __name__ == '__main__':
             tree.draw()
             print(f"Height: {tree.height()}")
             print(f"Leaves: {tree.leaves()}")
-

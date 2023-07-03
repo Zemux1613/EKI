@@ -46,7 +46,7 @@ class GrammarTool:
             content = x.strip()
             replaceRule = rhs + " -> " + nonTerminal
             x = nonTerminal + " -> " + content + " | " + nonTerminal + " " + content + " | ''"
-#            print(f"\t\tx:{x}, replaceRule:{replaceRule}")
+        #            print(f"\t\tx:{x}, replaceRule:{replaceRule}")
 
         return x.strip(), replaceRule
 
@@ -64,7 +64,6 @@ class GrammarTool:
                 new_grammar.append(line)
         return new_grammar
 
-
     def readGrammarFromFile(self, filename):
         output = ""
         startSymbol = ""
@@ -75,7 +74,6 @@ class GrammarTool:
         #
         # handle disjunctions
         #
-
         contentWithoutDisjunctions = self.handleDisjunctions(content)
 
         #
@@ -88,23 +86,10 @@ class GrammarTool:
             if len(line) == 0:
                 continue
             rhs = line.split("->")[0].strip()
-            #if "|" in line:
-            #    split = line.split("|")
-            #    for x in split:
-            #        currentLhs = x
-            #        if "->" in currentLhs:
-            #            currentLhs = x.split("->")[1].strip()
-            #        lhs, replaceRule = self.replaceSyntax(currentLhs, rhs)
-            #        # print(rhs + " -> " + lhs.strip())
-            #        output += lhs.strip() + "\n"
-            #        if not len(replaceRule) == 0:
-            #            output += replaceRule + "\n"
-            #else:
             currentLhs = line
             if "->" in currentLhs:
                 line.split("->")[1].strip()
             lhs, replaceRule = self.replaceSyntax(currentLhs, rhs)
-            #print("\t" + lhs.strip())
             output += lhs.strip() + "\n"
             if not len(replaceRule) == 0:
                 output += replaceRule + "\n"
