@@ -39,6 +39,10 @@ class GrammarTool:
     def read_grammar_from_file(self, filename):
         content = self.get_content(filename)
 
+        startSymbol = ""
+        if "->" in content:
+            startSymbol = content.split("->")[0]
+
         #
         # handle disjunctions
         #
@@ -69,11 +73,23 @@ class GrammarTool:
             else:
                 self.finalRules.append(rule)
 
+        #
+        # For NLTK, move a product rule of the start symbol to the begin
+        #
+        index = self.find_index_startswith(self.finalRules, startSymbol)
+        self.finalRules[0], self.finalRules[index] = self.finalRules[index], self.finalRules[0]
+
         # if debug:
         print("Grammar: ")
         for rule in self.finalRules:
             print(rule)
         return self.finalRules
+
+    def find_index_startswith(self, lst, symbol):
+        for index, element in enumerate(lst):
+            if element.startswith(symbol):
+                return index
+        return -1  # Falls kein passendes Element gefunden wurde
 
     def handle_expression_rule(self, rule):
         for symbol in self.symbols:

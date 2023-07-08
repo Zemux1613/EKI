@@ -66,8 +66,8 @@ class GrammarTool:
 
     def readGrammarFromFile(self, filename):
         output = ""
-        startSymbol = ""
         content = self.getContent(filename)
+        startSymbol = ""
         if "->" in content:
             startSymbol = content.split("->")[0]
 
