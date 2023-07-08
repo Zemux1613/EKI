@@ -4,11 +4,11 @@ from grammar.grammarTool_03 import *
 def loadGrammarFromFile(grammar_file):
     return CFG.fromstring(GrammarTool.read_grammar_from_file(GrammarTool(), grammar_file))
 
-
 # Hauptprogramm
 if __name__ == '__main__':
     # Pfad zur Grammatikdatei
-    grammar_file = '../grammar/grammar.txt'
+    grammar_file = input("Unter welchen Filepath finde ich einen Grammatik-File?: ")
+    #grammar_file = '../grammar/grammar.txt'
 
     # Lade Grammatikdatei
     grammar = loadGrammarFromFile(grammar_file)

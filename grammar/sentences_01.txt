@@ -1,0 +1,5 @@
+s -> 'Was' verb substantiv1 '.' | 'Was' verb pronom substantiv2 '.'
+verb -> 'ist' | 'kann' | 'bedeutet' | 'verstehst' | 'verbindest' | 'tust' | 'machst' | 'kannst' | 'magst'
+substantiv1 -> 'ein Auto' | 'eine Mutter sein' | 'Stehen'
+substantiv2 -> 'unter Lernen' | 'mit Essen' | 'mit Schnüren' | 'gern' | 'am liebsten' | 'gut' | 'nicht'
+pronom -> 'Du'
