@@ -80,9 +80,9 @@ class GrammarTool:
         self.finalRules[0], self.finalRules[index] = self.finalRules[index], self.finalRules[0]
 
         # if debug:
-        print("Grammar: ")
-        for rule in self.finalRules:
-            print(rule)
+        #print("Grammar: ")
+        #for rule in self.finalRules:
+        #    print(rule)
         return self.finalRules
 
     def find_index_startswith(self, lst, symbol):
