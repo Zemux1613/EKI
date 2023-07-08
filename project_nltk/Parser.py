@@ -25,6 +25,11 @@ if __name__ == '__main__':
         else:
             parser = ChartParser(grammar)
             print(f"test for word: '{inputLine}'")
-            parses = parser.parse(inputLine)
-            print(f"The word '{inputLine}' is valid: {any(parse for parse in parses)}")
 
+            try:
+                parses = parser.parse(inputLine)
+                is_valid = any(parse for parse in parses)
+            except ValueError:
+                is_valid = False
+
+            print(f"The word '{inputLine}' is valid: {is_valid}")
