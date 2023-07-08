@@ -1,9 +1,9 @@
 from nltk import CFG, ChartParser
-from grammar.grammarTool import *
+from grammar.grammarTool_03 import *
 
 def loadGrammarFromFile(grammar_file):
-    fileOutput = GrammarTool.readGrammarFromFile(GrammarTool(), grammar_file)
-    return CFG.fromstring(fileOutput)
+    return CFG.fromstring(GrammarTool.read_grammar_from_file(GrammarTool(), grammar_file))
+
 
 # Hauptprogramm
 if __name__ == '__main__':
