@@ -98,12 +98,10 @@ class GrammarTool:
             matches = re.findall(pattern, rhs)
             if matches:
                 for match in matches:
-                    print("rhs begin: " + rhs)
                     non_terminal = self.generate_non_terminal()
                     expression = match
                     new_rule = self.get_helper_rule(expression, non_terminal, symbol)
                     rhs = rhs.replace(f"({expression}){symbol}", f" {non_terminal} ")
-                    print("rhs after: " + rhs)
                     self.finalRules.append(new_rule)
 
             rule = f"{lhs} -> {rhs}"
