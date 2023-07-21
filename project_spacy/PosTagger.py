@@ -1,6 +1,9 @@
 import spacy
 from spacy.lang.de.examples import sentences
 import spacy.cli
+
+# Universal POS tags: https://universaldependencies.org/u/pos/#universal-pos-tags
+
 class PosTagger:
     def getPosTaggs(self, word):
         # spacy.cli.download("de_core_news_sm")
