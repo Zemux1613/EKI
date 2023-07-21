@@ -64,11 +64,11 @@ class GrammarTool:
         #
 
         for rule in rules_with_scope:
-            if "*" in rule or "?" in rule or "+" in rule:
+            if any(sym in rule for sym in self.symbols):
                 self.handle_expression_rule(rule)
 
         for rule in rules_without_scope:
-            if "?" in rule or "+" in rule or "*" in rule:
+            if any(sym in rule for sym in self.symbols):
                 self.handle_single_rule(rule)
             else:
                 self.finalRules.append(rule)
@@ -80,8 +80,8 @@ class GrammarTool:
         self.finalRules[0], self.finalRules[index] = self.finalRules[index], self.finalRules[0]
 
         # if debug:
-        #print("Grammar: ")
-        #for rule in self.finalRules:
+        # print("Grammar: ")
+        # for rule in self.finalRules:
         #    print(rule)
         return self.finalRules
 
@@ -108,12 +108,13 @@ class GrammarTool:
         self.finalRules.append(f"{lhs} -> {rhs}")
 
     def get_helper_rule(self, expression, non_terminal, symbol):
+        new_rule = ""
         if symbol == "?":
             new_rule = f"{non_terminal} -> {expression} | ''"
         elif symbol == "+":
-            new_rule = f"{non_terminal} -> {expression} | {non_terminal} {expression}"
+            new_rule = f"{non_terminal} -> {expression} | {expression} {non_terminal}"
         elif symbol == "*":
-            new_rule = f"{non_terminal} -> '' | {non_terminal} {expression}"
+            new_rule = f"{non_terminal} -> {expression} {non_terminal} | ''"
         return new_rule
 
     def handle_single_rule(self, rule):
