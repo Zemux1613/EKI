@@ -36,6 +36,16 @@ class GrammarTool:
                 new_grammar.append(line)
         return new_grammar
 
+    def searchForExistingNonTerminal(self, content):
+        for line in content:
+            if re.search("^(A[0-9]+).*$", line):
+                print("found " + line)
+                nonTerminal = line.split("->")[0].strip()
+                index = int(nonTerminal.replace("A", ""))
+                if self.nonTerminalIndex < index:
+                    print("new index " + str(index))
+                    self.nonTerminalIndex = index
+
     def read_grammar_from_file(self, filename):
         content = self.get_content(filename)
 
@@ -47,6 +57,11 @@ class GrammarTool:
         # handle disjunctions
         #
         content_without_disjunctions = self.handle_disjunctions(content)
+
+        #
+        # handle existing "A\d+" rules
+        #
+        self.searchForExistingNonTerminal(content_without_disjunctions)
 
         #
         # Search for scopes
