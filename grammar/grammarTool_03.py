@@ -39,11 +39,9 @@ class GrammarTool:
     def searchForExistingNonTerminal(self, content):
         for line in content:
             if re.search("^(A[0-9]+).*$", line):
-                print("found " + line)
                 nonTerminal = line.split("->")[0].strip()
                 index = int(nonTerminal.replace("A", ""))
                 if self.nonTerminalIndex < index:
-                    print("new index " + str(index))
                     self.nonTerminalIndex = index
 
     def read_grammar_from_file(self, filename):
