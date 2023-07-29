@@ -7,8 +7,8 @@ def loadGrammarFromFile(grammar_file):
 # Hauptprogramm
 if __name__ == '__main__':
     # Pfad zur Grammatikdatei
-    grammar_file = input("Unter welchen Filepath finde ich einen Grammatik-File?: ")
-    #grammar_file = '../grammar/grammar.txt'
+    # grammar_file = input("Unter welchen Filepath finde ich einen Grammatik-File?: ")
+    grammar_file = '../grammar/palindrome.txt'
 
     # Lade Grammatikdatei
     grammar = loadGrammarFromFile(grammar_file)
