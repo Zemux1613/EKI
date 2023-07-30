@@ -9,6 +9,7 @@ from project_spacy.PosTagger import *
 def loadGrammarFromFile(grammar_file):
     return CFG.fromstring(GrammarTool.read_grammar_from_file(GrammarTool(), grammar_file))
 
+
 def check_sentence(sentence, grammar):
     parser = nltk.ChartParser(grammar)
     try:
@@ -20,6 +21,7 @@ def check_sentence(sentence, grammar):
     except ValueError as e:
         print("Fehler beim Parsen:", e)
         return False
+
 
 # Hauptprogramm
 if __name__ == '__main__':
@@ -45,11 +47,9 @@ if __name__ == '__main__':
             running = False
             print("Thanks for using me!")
         else:
-            #parser = ChartParser(grammar)
+            # parser = ChartParser(grammar)
             print(f"test for word: '{inputLine}'")
             pos_tags = PosTagger.getPosTaggs(PosTagger(), inputLine)
-
-            print(pos_tags)
 
             # Testen des Parsers
             is_valid = check_sentence(' '.join(pos_tags), grammar)
