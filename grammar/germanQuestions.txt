@@ -1,9 +1,4 @@
-s -> WerFrage | WannFrage | JaNeinFrage | SonstigeFrage
+s -> 'VERB' (rest)+ 'PUNCT' | fragewort s
+fragewort -> 'PRON' | 'PROPN' | 'ADV'
 
-WerFrage -> 'PRON' 'VERB' (Satzglied)* 'PUNCT'
-WannFrage -> 'ADV' 'VERB' (Satzglied)* 'PUNCT'
-JaNeinFrage -> 'VERB' 'PRON' (Satzglied)* 'PUNCT' | 'VERB' 'PROPN' (Satzglied)* 'PUNCT' | 'VERB' 'NOUN' (Satzglied)* 'PUNCT'
-SonstigeFrage -> Fragepronomen 'AUX' 'PRON' (Satzglied)* 'PUNCT'
-Fragepronomen -> 'PRON' | 'DET'
-
-Satzglied -> 'ADJ' | 'ADP' | 'ADV' | 'AUX' | 'CCONJ' | 'DET' | 'INTJ' | 'NOUN' | 'NUM' | 'PART' | 'PRON' | 'PROPN' | 'SCONJ' | 'SYM' | 'VERB' | 'X'
+rest ->  'ADJ' | 'ADP' | 'ADV' | 'AUX' | 'CCONJ' | 'DET' | 'INTJ' | 'NOUN' | 'NUM' | 'PART' | 'PRON' | 'PROPN' | 'SCONJ' | 'SYM' | 'VERB' | 'X'

@@ -1,5 +1,7 @@
 import nltk
-from nltk import CFG, ChartParser, RecursiveDescentParser
+from nltk import CFG, ChartParser
+from nltk.parse import chart
+
 from grammar.grammarTool_03 import *
 from project_spacy.PosTagger import *
 
@@ -7,21 +9,23 @@ from project_spacy.PosTagger import *
 def loadGrammarFromFile(grammar_file):
     return CFG.fromstring(GrammarTool.read_grammar_from_file(GrammarTool(), grammar_file))
 
-
 def check_sentence(sentence, grammar):
-    parser = RecursiveDescentParser(grammar)
-    #words = nltk.word_tokenize(sentence)
+    parser = nltk.ChartParser(grammar)
     try:
-        for tree in parser.parse(sentence):
+        for tree in parser.parse(nltk.word_tokenize(sentence)):
             print("Zugehörige Syntaxbaumstruktur:", tree)
             return True
-        return False
-    except ValueError:
         print("Keine Übereinstimmung mit der definierten Grammatik gefunden.")
+        return None
+    except ValueError as e:
+        print("Fehler beim Parsen:", e)
         return False
 
 # Hauptprogramm
 if __name__ == '__main__':
+
+    chart.demo_grammar()
+
     # Pfad zur Grammatikdatei
     grammar_file = '../grammar/germanQuestions.txt'
 
@@ -43,14 +47,11 @@ if __name__ == '__main__':
         else:
             #parser = ChartParser(grammar)
             print(f"test for word: '{inputLine}'")
-            posTags = PosTagger.getPosTaggs(PosTagger(), inputLine)
+            pos_tags = PosTagger.getPosTaggs(PosTagger(), inputLine)
 
-            print(posTags)
+            print(pos_tags)
 
             # Testen des Parsers
-            is_valid = check_sentence(' '.join(posTags), grammar)
-
+            is_valid = check_sentence(' '.join(pos_tags), grammar)
 
             print(f"The word '{inputLine}' is valid: {is_valid}")
-
-
