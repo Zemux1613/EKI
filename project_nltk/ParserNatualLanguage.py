@@ -17,7 +17,7 @@ def check_sentence(sentence, grammar):
             print("Zugehörige Syntaxbaumstruktur:", tree)
             return True
         print("Keine Übereinstimmung mit der definierten Grammatik gefunden.")
-        return None
+        return False
     except ValueError as e:
         print("Fehler beim Parsen:", e)
         return False
@@ -25,9 +25,6 @@ def check_sentence(sentence, grammar):
 
 # Hauptprogramm
 if __name__ == '__main__':
-
-    chart.demo_grammar()
-
     # Pfad zur Grammatikdatei
     grammar_file = '../grammar/germanQuestions.txt'
 
