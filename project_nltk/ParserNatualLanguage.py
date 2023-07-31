@@ -52,3 +52,5 @@ if __name__ == '__main__':
             is_valid = check_sentence(' '.join(pos_tags), grammar)
 
             print(f"The word '{inputLine}' is valid: {is_valid}")
+            if not is_valid:
+                print(pos_tags)
