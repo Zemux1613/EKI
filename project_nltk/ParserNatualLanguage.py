@@ -1,4 +1,5 @@
 import nltk
+nltk.download('punkt')
 from nltk import CFG, ChartParser
 from nltk.parse import chart
 
@@ -26,7 +27,7 @@ def check_sentence(sentence, grammar):
 # Hauptprogramm
 if __name__ == '__main__':
     # Pfad zur Grammatikdatei
-    grammar_file = '../grammar/germanQuestions.txt'
+    grammar_file = '../grammar/test.txt'
 
     # Lade Grammatikdatei
     grammar = loadGrammarFromFile(grammar_file)

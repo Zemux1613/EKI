@@ -1,0 +1,6 @@
+s -> 'VERB' subjekt (rest)* 'PUNCT' | fragewort s
+fragewort -> 'PRON' | 'PROPN' | 'ADV'
+
+rest ->  'ADJ' | 'ADP' | 'ADV' | 'AUX' | 'CCONJ' | 'DET' | 'INTJ' | 'NOUN' | 'NUM' | 'PART' | 'PRON' | 'PROPN' | 'SCONJ' | 'SYM' | 'VERB' | 'X'
+subjekt -> ('DET')? (attribut)? 'NOUN' | 'PRON'
+attribut -> 'ADJ' | 'ADJ' 'und' attribut

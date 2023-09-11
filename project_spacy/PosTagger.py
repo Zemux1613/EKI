@@ -6,7 +6,7 @@ import spacy.cli
 
 class PosTagger:
     def getPosTaggs(self, word):
-        # spacy.cli.download("de_core_news_sm")
+        #spacy.cli.download("de_core_news_sm")
 
         nlp = spacy.load("de_core_news_sm")
         doc = nlp(word)
